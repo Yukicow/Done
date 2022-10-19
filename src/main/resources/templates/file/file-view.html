@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <label for="title" th:text="#{label.file.title}">제목</label>
+        <input type="text" id="title" th:value="${files?.title}" readonly>
+    </div>
+    <div>
+        <label for="content" th:text="#{label.file.content}">내용</label>
+        <textarea id="content" th:text="${files?.content}" readonly></textarea>
+    </div>
+    <div>
+        <label for="attachFile" th:text="#{label.file.attachFile}">파일</label>
+        <a id="attachFile" th:href="|/file/attach/${files.getId}|"
+           th:text="${files?.attachFile?.uploadFileName}"></a>
+    </div>
+    <div>
+        <label for="files" th:text="#{label.file.files}">이미지 파일</label><br>
+        <img id=files th:each="imgFile : ${files?.files}" th:src="|/file/images/${imgFile.storeFileName}|" width="300", height="300" >
+    </div>
+    <a href="/file/list" th:href="|/file/list|">파일 리스트</a>
+</body>
+</html>

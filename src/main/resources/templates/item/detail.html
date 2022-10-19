@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .error{
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+  <div th:if="${noRight}">
+    <p class="error" th:text="#{noRight}" >글로벌 에러</p>
+  </div>
+  <div>
+    <label for="id" th:text="#{label.item.id}">상품 번호</label>
+    <input type="text" id="id" th:value="${item.id}" disabled>
+  </div>
+  <div>
+    <label for="itemName" th:text="#{label.item.name}">상품명</label>
+    <input type="text" id="itemName" th:value="${item.itemName}" disabled>
+  </div>
+  <div>
+    <label for="price" th:text="#{label.item.price}">상품 가격</label>
+    <input type="text" id="price" th:value="${item.price}" disabled>
+  </div>
+  <div>
+    <label for="quantity" th:text="#{label.item.quantity}">상품 수량</label>
+    <input type="text" id="quantity" th:value="${item.quantity}" disabled>
+  </div>
+  <select disabled>
+    <option th:text="${item.deliveryCode.description}"></option>
+  </select>
+  <br>
+  <a href="/item/update" th:href="|/item/update/${item.id}|">상품 수정</a><br>
+  <a href="/item/list" th:href="|/item/list|">상품 목록</a>
+</body>
+</html>

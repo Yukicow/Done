@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .error{
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div th:if="${noRight}">
+        <p class="error" th:text="#{noRight}">글로벌 에러</p>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th><a th:text="#{table.item.id}">상품번호</a></th>
+                <th><a th:text="#{table.item.name}">상품명</a></th>
+            </tr>
+        </thead>
+        <tbody th:if="${!items.isEmpty()}">
+            <tr th:each="item : ${items}">
+                <td><a  th:text="${item.id}"></a></td>
+                <td><a  th:text="${item.itemName}" th:href="|/item/${item.id}|"></a></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/item/add" th:href="|/item/add|">상품 등록</a><br>
+    <a href="/" th:href="|/|">메인 페이지</a>
+</body>
+</html>

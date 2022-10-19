@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .error{
+            border-color: red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" th:action th:object="${updateForm}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"
+               class="error">글로벌 오류</p>
+        </div>
+        <div>
+            <label for="id" th:text="#{label.item.id}">상품 번호</label>
+            <input type="text" id="id" th:field="*{id}" th:errorclass="error" readonly>
+            <div class="error" th:errors="*{id}">상품 번호 오류</div>
+        </div>
+        <div>
+            <label for="writerId" th:text="#{label.item.writerId}">작성자</label>
+            <input type="text" id="writerId" th:field="*{writerId}" th:errorclass="error" readonly>
+            <div class="error" th:errors="*{writerId}">작성자 오류</div>
+        </div>
+        <div>
+            <label for="itemName" th:text="#{label.item.name}">상품명</label>
+            <input type="text" id="itemName" th:field="*{itemName}" th:errorclass="error">
+            <div class="error" th:errors="*{itemName}">상품명 오류</div>
+        </div>
+        <div>
+            <label for="price" th:text="#{label.item.price}">상품 가격</label>
+            <input type="text" id="price" th:field="*{price}" th:errorclass="error">
+            <div class="error" th:errors="*{price}">가격 오류</div>
+        </div>
+        <div>
+            <label for="quantity" th:text="#{label.item.quantity}">상품 수량</label>
+            <input type="text" id="quantity" th:field="*{quantity}" th:errorclass="error">
+            <div class="error" th:errors="*{quantity}">수량 오류</div>
+        </div>
+        <select th:field="*{deliveryCode}" th:errorclass="error">
+            <option th:text="#{select.delivery.option}" value=""></option>
+            <option th:each="delivery : ${deliveryCodes}" th:value="${delivery}"
+                    th:text="${delivery.description}"></option>
+        </select>
+        <div class="error" th:errors="*{deliveryCode}">배송 선택 오류</div>
+        <br>
+        공개 : <input type="checkbox" th:field="*{pub}">
+        <br>
+        <input type="submit" value="등록">
+    </form>
+    <a href="/item/list" th:href="|/item/list|">상품 목록</a>
+</body>
+</html>

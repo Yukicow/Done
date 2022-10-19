@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table border="1">
+    <thead>
+      <tr>
+        <th th:text="#{table.file.id}">제목</th>
+        <th th:text="#{table.file.title}">제목</th>
+      </tr>
+    </thead>
+    <tbody th:if="${files}">
+      <tr th:each="file : ${files}">
+        <td th:text="${file.id}"></td>
+        <td><a th:text="${file.title}" th:href="|/file/${file.id}|"></a></td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="/file/upload" th:href="|/file/upload|">파일 업로드</a><br>
+  <a href="/" th:href="|/|">메인 페이지</a>
+</body>
+</html>
